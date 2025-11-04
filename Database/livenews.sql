@@ -24,26 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `info`
---
-
-CREATE TABLE `info` (
-  `id` int NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `bio` text NOT NULL,
-  `status` tinyint NOT NULL DEFAULT '1' COMMENT '1= active. 0= Deactive'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `info`
---
-
-INSERT INTO `info` (`id`, `title`, `bio`, `status`) VALUES
-(1, 'cpr', '<p style=\"text-align: center;\"> CopyRight by <a href=\"https://www.youtube.com/@codecampbdofficial\">Code Camp BD</a> Design and Developer <a href=\"https://developerrony.com\">MH RONY</a> All Resalve\n                <?php echo \"20\".date(\"y\"); ?></p>', 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbladmin`
 --
 
@@ -208,11 +188,6 @@ INSERT INTO `tblsubcategory` (`SubCategoryId`, `CategoryId`, `Subcategory`, `Sub
 --
 
 --
--- Indexes for table `info`
---
-ALTER TABLE `info`
-  ADD PRIMARY KEY (`id`);
-
 --
 -- Indexes for table `tbladmin`
 --
@@ -260,12 +235,6 @@ ALTER TABLE `tblsubcategory`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `info`
---
-ALTER TABLE `info`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbladmin`
