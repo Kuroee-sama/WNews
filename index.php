@@ -23,6 +23,8 @@
 </head>
 
 <body>
+    <!-- Navigation -->
+    <?php include('includes/header.php');?>
     <!-- Page Content -->
     <div class="container-fluid">
         <div class="row" style="margin-top: 4%">
