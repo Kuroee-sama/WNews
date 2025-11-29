@@ -30,40 +30,7 @@ echo "<script type='text/javascript'> document.location = 'index.php'; </script>
   ?>
 
     <!--Tampilan (HTML dan form) untuk input data lupa password.-->
-        <!DOCTYPE html>
-        <html lang="en">
-
-        <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta name="description" content="Livr News  Portal.">
-            <meta name="author" content="xyz">
-
-            <!-- App title -->
-            <title>Live News Portal | Forgot Password</title>
-
-            <!-- App css -->
-            <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-            <link href="assets/css/core.css" rel="stylesheet" type="text/css" />
-            <link href="assets/css/components.css" rel="stylesheet" type="text/css" />
-            <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
-            <link href="assets/css/pages.css" rel="stylesheet" type="text/css" />
-            <link href="assets/css/menu.css" rel="stylesheet" type="text/css" />
-            <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
-
-             <!--Script sederhana untuk memastikan password baru dan konfirmasi password sama sebelum form dikirim.-->
-            <script src="assets/js/modernizr.min.js"></script>
-            <script type="text/javascript">
-            function checkpass() {
-                if (document.changepassword.newpassword.value != document.changepassword.confirmpassword.value) {
-                    alert('New Password and Confirm Password field does not match');
-                    document.changepassword.confirmpassword.focus();
-                    return false;
-                }
-                return true;
-            }
-            </script>
-        </head>
+        
 
         <body class="bg-transparent">
 
