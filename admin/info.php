@@ -1,28 +1,4 @@
-<?php 
-session_start(); //Mengaktifkan sesi PHP agar sistem bisa mengenali admin yang sudah login.
-include('includes/config.php'); //Mengimpor konfigurasi database untuk menjalankan query.
-error_reporting(0); //Menyembunyikan pesan error dari browser.
-if(strlen($_SESSION['login'])==0) //Mengecek apakah variabel sesi 'login' kosong → artinya admin belum login.
-  { 
-header('location:index.php'); //Jika belum login, arahkan ke halaman index.php (halaman login).
-}
-else{  //Jika sudah login, lanjutkan ke bagian berikutnya.
-if(isset($_POST['update'])) //Mengecek apakah form update dikirim oleh admin
-{
-$pagetype='aboutus'; //Menentukan halaman mana yang diubah,di sini adalah halaman 'aboutus'.
-$pagetitle=$_POST['pagetitle']; //Mengambil data dari form input dengan nama 'pagetitle'.
-$pagedetails=$_POST['pagedescription']; //Mengambil data dari form input dengan nama 'pagedescription'.
 
-$query=mysqli_query($con,"update tblpages set PageTitle='$pagetitle',Description='$pagedetails' where PageName='$pagetype' "); //Menjalankan query SQL untuk memperbarui judul dan deskripsi halaman 'aboutus' di tabel tblpages.
-if($query)
-{
-$msg="About us  page successfully updated "; //Jika query berhasil, simpan pesan sukses ke variabel $msg.
-}
-else{
-$error="Something went wrong . Please try again."; //Jika query gagal, simpan pesan error ke variabel $error.   
-} 
-
-}
 ?>
 
         <?php include('includes/topheader.php');?>
