@@ -189,7 +189,24 @@
 <!-- End Right content here -->
 <!-- ============================================================== -->
 
+<!-- Right Sidebar -->
+<div class="side-bar right-bar">                                <!-- Sidebar kanan (panel pengaturan). -->
+    <a href="javascript:void(0);" class="right-bar-toggle">     <!-- Tombol untuk menutup panel kanan. -->
+        <i class="mdi mdi-close-circle-outline"></i>            <!-- Ikon close (MDI). -->
+    </a>
+    <h4 class="">Settings</h4>                                   <!-- Judul panel pengaturan. -->
+    <div class="setting-list nicescroll">                       <!-- Daftar pengaturan dengan custom scroll. -->
 
+        <div class="row m-t-20">                                <!-- Item pengaturan: Notifications. -->
+            <div class="col-xs-8">
+                <h5 class="m-0">Notifications</h5>
+                <p class="text-muted m-b-0"><small>Do you need them?</small></p>
+            </div>
+            <div class="col-xs-4 text-right">
+                <input type="checkbox" checked data-plugin="switchery" data-color="#7fc1fc" data-size="small" />
+                <!-- Switch (Switchery) default aktif. -->
+            </div>
+        </div>
 
         <div class="row m-t-20">                                <!-- Item pengaturan: API Access. -->
             <div class="col-xs-8">
