@@ -61,26 +61,3 @@ function googleTranslateElementInit() {
 }
 </script>
 
-<style>
-.goog-logo-link {
-    display: none !important;
-}
-
-.goog-te-gadget {
-    color: transparent;
-}
-
-.goog-te-gadget .goog-te-combo {
-    margin: 0px 0;
-    padding: 8px;
-    color: #000;
-    background: #eeee;
-}
-
-#google_translate_element {
-    padding-top: 13px;
-    position: absolute;
-    top: 7px;
-    right: 100px;
-}
-</style>
