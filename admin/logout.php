@@ -6,4 +6,7 @@ $_SESSION['login']=="";
 session_unset(); 
 session_destroy(); 
 ?>
-        
+        <!--Mengalihkan pengguna ke halaman index.php (halaman login admin).-->
+        <script language="javascript">
+document.location = "index.php";
+        </script>
