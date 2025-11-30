@@ -1,0 +1,62 @@
+services: 
+  nginx: 
+    build: 
+      context: . 
+      dockerfile: Dockerfile.nginx 
+    ports: 
+      - "80:80" 
+    volumes: 
+      - .:/var/www/myphpapp 
+    depends_on: 
+      - php 
+    networks: 
+      - app-network 
+
+  php: 
+    build: 
+      context: . 
+      dockerfile: Dockerfile 
+    user: "1000:1000" 
+    working_dir: /var/www/myphpapp 
+    volumes: 
+      - .:/var/www/myphpapp
+      - mysql_socket:/var/run/mysqld      # <--- share socket MySQL
+    depends_on: 
+      - mysql 
+    networks: 
+      - app-network 
+
+  mysql: 
+    image: mysql:8.0 
+    environment: 
+      MYSQL_ROOT_PASSWORD: password 
+      MYSQL_DATABASE: newsportal                  # <--- samakan dengan di PHP
+      MYSQL_USER: appuser 
+      MYSQL_PASSWORD: password 
+    volumes: 
+      - mysql_data:/var/lib/mysql 
+      - mysql_socket:/var/run/mysqld      # <--- share socket ke PHP
+    ports: 
+      - "3306:3306" 
+    networks: 
+      - app-network 
+
+  phpmyadmin: 
+    image: phpmyadmin/phpmyadmin 
+    ports: 
+      - "8081:80" 
+    environment: 
+      - PMA_HOST=mysql 
+      - MYSQL_ROOT_PASSWORD=password 
+    depends_on: 
+      - mysql 
+    networks: 
+      - app-network 
+
+volumes: 
+  mysql_data: 
+  mysql_socket:       # <--- volume baru untuk socket
+
+networks: 
+  app-network: 
+    driver: bridge
