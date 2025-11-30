@@ -113,7 +113,22 @@
         </div>
         <!-- /.row -->
         <!---Comment Display Section --->
-   
+        <div class="col-md-8">
+            <?php 
+                  $sts=1;
+                  $query=mysqli_query($con,"select name,comment,postingDate from  tblcomments where postId='$pid' and status='$sts'");
+                  while ($row=mysqli_fetch_array($query)) {
+                  ?>
+            <div class="media mb-4">
+                <img class="d-flex mr-3 rounded-circle" src="images/usericon.png" alt="">
+                <div class="media-body">
+                    <h5 class="mt-0"><?php echo htmlentities($row['name']);?> <br />
+                        <span style="font-size:11px;"><b>at</b> <?php echo htmlentities($row['postingDate']);?></span>
+                    </h5>
+                    <?php echo htmlentities($row['comment']);?>
+                </div>
+            </div>
+            <?php } ?>
             <!---Comment Section --->
         </div>
         <div class="col-md-8">
