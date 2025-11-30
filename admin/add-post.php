@@ -8,20 +8,7 @@
    header('location:index.php');                      // Redirect ke halaman login
    }                                                  // (disarankan tambahkan exit; setelah header)
    else{
-   // For adding post  
-   if(isset($_POST['submit']))                        // Jika form disubmit
-   {
-   $posttitle=$_POST['posttitle'];                    // Judul posting (string)
-   $catid=$_POST['category'];                         // ID kategori (integer)
-   $subcatid=$_POST['subcategory'];                   // ID subkategori (integer)
-   $postdetails=$_POST['postdescription'];            // Konten posting (HTML dari Summernote)
-   $postedby=$_SESSION['login'];                      // Nama/identitas user dari session untuk kolom postedBy
-
-   $arr = explode(" ",$posttitle);                    // Split judul per spasi
-   $url=implode("-",$arr);                            // Gabung dengan tanda '-' untuk membuat slug URL sederhana
-
-   $imgfile=$_FILES["postimage"]["name"];             // Nama file gambar yang diupload (nama asli)
-
+  
    // get the image extension
    $extension = substr($imgfile,strlen($imgfile)-4,strlen($imgfile)); // Ambil 4 char terakhir sebagai "ekstensi"
    // Catatan: trik ini mendukung ".jpg", ".png", ".gif" dan "jpeg" (tanpa titik) tapi rapuh untuk variasi lain.
