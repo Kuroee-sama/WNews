@@ -78,7 +78,7 @@ jobs:
           echo "❌ Deployment gagal di laptop-andi! Cek log error di atas"
         fi
 
-  deploy-Wbestar:
+deploy-Wbestar:
     runs-on: [bstr]
     
     steps:
@@ -131,14 +131,14 @@ jobs:
     # Step 6: Test apakah aplikasi berjalan dengan baik
     - name: Health check
       run: |
-        curl -f http://localhost:80 || exit 1  # Test akses ke aplikasi
+        curl -f http://localhost || exit 1  # Test akses ke aplikasi
         
     # Step 7: Kasih tahu hasil deployment
     - name: Notify deployment status
       if: always()  # Selalu jalankan step ini (sukses atau gagal)
       run: |
         if [ ${{ job.status }} == 'success' ]; then
-          echo "✅ Deployment berhasil di WNewsBestar! Aplikasi sudah update ke versi terbaru"
+          echo "✅ Deployment berhasil di laptop-andi! Aplikasi sudah update ke versi terbaru"
         else
-          echo "❌ Deployment gagal di WNewsvara! Cek log error di atas"
+          echo "❌ Deployment gagal di laptop-andi! Cek log error di atas"
         fi
