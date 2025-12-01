@@ -14,7 +14,7 @@ on:
 
 jobs:
   deploy-vara:
-    runs-on: [WNewsvara]
+    runs-on: [vra]
     
     steps:
     # Step 0: Detect project path dynamically
@@ -79,7 +79,7 @@ jobs:
         fi
 
   deploy-Bestar:
-    runs-on: [WNewsBestar]
+    runs-on: bstr
     
     steps:
     # Step 0: Detect project path dynamically
