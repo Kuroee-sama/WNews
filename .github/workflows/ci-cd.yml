@@ -53,7 +53,7 @@ jobs:
     steps:
     - name: Set project path
       run: |
-        PROJECT_PATH="/home/thertiana/WNews"
+        PROJECT_PATH="/home/chloen/WNews"
         echo "PROJECT_PATH=$PROJECT_PATH" >> $GITHUB_ENV
 
     - name: Pull latest code
@@ -81,4 +81,4 @@ jobs:
       run: sleep 20
 
     - name: Health check
-      run: curl -f http://localhost || exit 1
+      run: curl -f http://localhost || exit 1
