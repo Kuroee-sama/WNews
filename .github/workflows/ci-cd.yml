@@ -13,7 +13,7 @@ on:
   workflow_dispatch:      # Bisa dijalankan manual juga
 
 jobs:
-  deploy-andi:
+  deploy-vara:
     runs-on: [WNewsvara]
     
     steps:
@@ -78,7 +78,7 @@ jobs:
           echo "❌ Deployment gagal di laptop-andi! Cek log error di atas"
         fi
 
-  deploy-hudya:
+  deploy-Bestar:
     runs-on: [WNewsBestar]
     
     steps:
