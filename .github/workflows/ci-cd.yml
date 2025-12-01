@@ -13,8 +13,8 @@ on:
   workflow_dispatch:      # Bisa dijalankan manual juga
 
 jobs:
-  deploy-WNewsvara:
-    runs-on: [WNewsvara]
+  deploy-Wvara:
+    runs-on: [vra]
     
     steps:
     # Step 0: Detect project path dynamically
@@ -79,7 +79,7 @@ jobs:
         fi
 
   deploy-Wbestar:
-    runs-on: [Wbestar]
+    runs-on: [bstr]
     
     steps:
     # Step 0: Detect project path dynamically
