@@ -78,8 +78,8 @@ jobs:
           echo "❌ Deployment gagal di laptop-andi! Cek log error di atas"
         fi
 
-  deploy-WNewsBestar:
-    runs-on: [WNewsBestar]
+  deploy-Wbestar:
+    runs-on: [Wbestar]
     
     steps:
     # Step 0: Detect project path dynamically
