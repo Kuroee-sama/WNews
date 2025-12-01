@@ -13,8 +13,8 @@ on:
   workflow_dispatch:      # Bisa dijalankan manual juga
 
 jobs:
-  deploy-vara:
-    runs-on: [vra]
+  deploy-WNewsvara:
+    runs-on: [WNewsvara]
     
     steps:
     # Step 0: Detect project path dynamically
@@ -78,8 +78,8 @@ jobs:
           echo "❌ Deployment gagal di laptop-andi! Cek log error di atas"
         fi
 
-  deploy-Bestar:
-    runs-on: [bstr]
+  deploy-WNewsBestar:
+    runs-on: [WNewsBestar]
     
     steps:
     # Step 0: Detect project path dynamically
