@@ -121,11 +121,10 @@ jobs:
         run: |
           sleep 30
           docker compose ps
-  # Step 6: Test apakah aplikasi berjalan dengan baik
+    # Step 6: Test apakah aplikasi berjalan dengan baik
       - name: Health check
         run: |
-          curl -f http://localhost/ || exit 1
-          
+          curl -f http://localhost || exit 1  # Test akses ke aplikasi
   # Step 7: Kasih tahu hasil deployment
       - name: Notify deployment status
         if: always()
