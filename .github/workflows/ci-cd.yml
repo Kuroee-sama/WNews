@@ -79,7 +79,7 @@ jobs:
         fi
 
   deploy-Bestar:
-    runs-on: bstr
+    runs-on: [bstr]
     
     steps:
     # Step 0: Detect project path dynamically
