@@ -1,7 +1,7 @@
 # Custom Nginx Dockerfile 
-FROM nginx 
-COPY ./default.conf /etc/nginx/conf.d/default.conf 
+FROM nginx                               # Menggunakan base image resmi Nginx
+COPY ./default.conf /etc/nginx/conf.d/default.conf   # Copy konfigurasi Nginx custom ke dalam container
 # Expose port 80 
-EXPOSE 80 
+EXPOSE 80                                # Membuka port 80 agar bisa diakses dari host
 # Command untuk menjalankan nginx 
-CMD ["nginx", "-g", "daemon off;"] 
+CMD ["nginx", "-g", "daemon off;"]       # Menjalankan Nginx di foreground agar container tetap hidup

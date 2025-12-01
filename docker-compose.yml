@@ -1,62 +1,62 @@
 services: 
   nginx: 
     build: 
-      context: . 
-      dockerfile: Dockerfile.nginx 
+      context: .                      # folder project
+      dockerfile: Dockerfile.nginx    # Dockerfile khusus nginx
     ports: 
-      - "80:80" 
+      - "80:80"                       # expose port 80 container ke host
     volumes: 
-      - .:/var/www/myphpapp 
+      - .:/var/www/myphpapp           # bind source code ke container
     depends_on: 
-      - php 
+      - php                           # nginx menunggu php siap
     networks: 
-      - app-network 
+      - app-network                   # pakai network yang sama
 
   php: 
     build: 
-      context: . 
-      dockerfile: Dockerfile 
-    user: "1000:1000" 
-    working_dir: /var/www/myphpapp 
+      context: .                      # folder project
+      dockerfile: Dockerfile          # Dockerfile PHP
+    user: "1000:1000"                 # menjalankan container sebagai user non-root
+    working_dir: /var/www/myphpapp    # direktori kerja aplikasi di dalam container
     volumes: 
-      - .:/var/www/myphpapp
-      - mysql_socket:/var/run/mysqld      # <--- share socket MySQL
+      - .:/var/www/myphpapp           # mount kode project ke container PHP
+      - mysql_socket:/var/run/mysqld  # share MySQL UNIX socket
     depends_on: 
-      - mysql 
+      - mysql                         # PHP menunggu MySQL siap
     networks: 
-      - app-network 
+      - app-network                   # pakai network yang sama
 
   mysql: 
-    image: mysql:8.0 
+    image: mysql:8.0                  # pakai image resmi MySQL
     environment: 
-      MYSQL_ROOT_PASSWORD: password 
-      MYSQL_DATABASE: newsportal                  # <--- samakan dengan di PHP
-      MYSQL_USER: appuser 
-      MYSQL_PASSWORD: password 
+      MYSQL_ROOT_PASSWORD: password   # password root
+      MYSQL_DATABASE: newsportal      # nama database default
+      MYSQL_USER: appuser             # user tambahan
+      MYSQL_PASSWORD: password        # password user tambahan
     volumes: 
-      - mysql_data:/var/lib/mysql 
-      - mysql_socket:/var/run/mysqld      # <--- share socket ke PHP
+      - mysql_data:/var/lib/mysql     # simpan data MySQL agar tidak hilang
+      - mysql_socket:/var/run/mysqld  # share socket ke PHP
     ports: 
-      - "3306:3306" 
+      - "3306:3306"                   # buka port mysql ke host
     networks: 
-      - app-network 
+      - app-network                   # network sama
 
   phpmyadmin: 
-    image: phpmyadmin/phpmyadmin 
+    image: phpmyadmin/phpmyadmin      # image phpmyadmin
     ports: 
-      - "8081:80" 
+      - "8081:80"                     # akses phpMyAdmin via localhost:8081
     environment: 
-      - PMA_HOST=mysql 
-      - MYSQL_ROOT_PASSWORD=password 
+      - PMA_HOST=mysql                # host db = nama servicenya
+      - MYSQL_ROOT_PASSWORD=password  # password root mysql
     depends_on: 
-      - mysql 
+      - mysql                         # menunggu mysql jalan
     networks: 
-      - app-network 
+      - app-network                   # network sama
 
 volumes: 
-  mysql_data: 
-  mysql_socket:       # <--- volume baru untuk socket
+  mysql_data:                         # volume untuk data mysql
+  mysql_socket:                       # volume untuk share socket mysql
 
 networks: 
   app-network: 
-    driver: bridge
+    driver: bridge                    # gunakan bridge network (default)
