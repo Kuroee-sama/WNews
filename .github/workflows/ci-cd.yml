@@ -81,5 +81,5 @@ jobs:
       run: sleep 20
 
     - name: Health check
-      run: curl -f http://localhost || exit 1
+      run: curl -f http://localhost:8081 || exit 1
       
