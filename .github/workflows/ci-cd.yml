@@ -82,3 +82,4 @@ jobs:
 
     - name: Health check
       run: curl -f http://localhost || exit 1
+      
