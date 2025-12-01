@@ -13,7 +13,7 @@ jobs:
     # Detect path
     - name: Set project path
       run: |
-        PROJECT_PATH="/home/vra/WNews"
+        PROJECT_PATH="/home/thertiana/WNews"
         if [ ! -d "$PROJECT_PATH" ]; then
           echo "❌ Folder WNews ga ketemu"
           exit 1
@@ -53,7 +53,7 @@ jobs:
     steps:
     - name: Set project path
       run: |
-        PROJECT_PATH="$HOME/WNews"
+        PROJECT_PATH="/home/chloen/WNews"
         echo "PROJECT_PATH=$PROJECT_PATH" >> $GITHUB_ENV
 
     - name: Pull latest code
