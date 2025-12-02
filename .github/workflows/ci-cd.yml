@@ -14,55 +14,62 @@ on:
 
 jobs:
   deploy-Wvara:
-    runs-on: [vra]
+    runs-on: [vra]  # Runner yang akan menjalankan job ini (harus sesuai label runner)
     
     steps:
     # Step 0: Detect project path dynamically
     - name: Set project path
       run: |
-        PROJECT_PATH="$HOME/WNews"
-          if [ ! -d "$PROJECT_PATH" ]; then
+        PROJECT_PATH="$HOME/WNews"   # Tentukan path folder project
+          if [ ! -d "$PROJECT_PATH" ]; then   # Cek apakah folder ada
             echo "❌ Error: Folder project tidak ditemukan di $PROJECT_PATH"
-            exit 1
+            exit 1                          # Hentikan workflow kalau folder tidak ada
           fi
-          echo "PROJECT_PATH=$PROJECT_PATH" >> $GITHUB_ENV
-          echo "✅ Found project at: $PROJECT_PATH"
+          echo "PROJECT_PATH=$PROJECT_PATH" >> $GITHUB_ENV  # Simpan path sebagai environment variable
+          echo "✅ Found project at: $PROJECT_PATH"          # Tampilkan path project
+        
     # Step 1: Ambil kode terbaru dari branch master
     - name: Pull latest changes
-      working-directory: ${{ env.PROJECT_PATH }}
+      working-directory: ${{ env.PROJECT_PATH }}  # Gunakan folder project yang sudah ditentukan
       run: |
-        git fetch origin master      # Download update terbaru
+        git fetch origin master      # Download update terbaru dari remote
         git reset --hard origin/master  # Reset ke versi terbaru (hapus perubahan lokal)
+        
     # Step 2: Stop semua container yang sedang berjalan
     - name: Stop existing containers
       working-directory: ${{ env.PROJECT_PATH }}
       run: |
-        docker compose down || true  # Stop container (|| true artinya lanjut walaupun error)
+        docker compose down || true  # Stop container, lanjutkan meski error (|| true)
+        
     # Step 3: Hapus image lama untuk menghemat storage
     - name: Remove old images
       working-directory: ${{ env.PROJECT_PATH }}
       run: |
         docker system prune -f    # Hapus container/network yang tidak terpakai
         docker image prune -a -f  # Hapus semua image yang tidak terpakai
+        
     # Step 4: Build ulang dan jalankan semua container
     - name: Build and start containers
       working-directory: ${{ env.PROJECT_PATH }}
       run: |
         docker compose build --no-cache  # Build image baru tanpa cache
         docker compose up -d             # Jalankan container di background
+        
     # Step 5: Tunggu sampai semua service siap
     - name: Wait for services to be ready
       working-directory: ${{ env.PROJECT_PATH }}
       run: |
-        sleep 30                # Tunggu 30 detik
-        docker compose ps       # Lihat status semua container
+        sleep 30                # Tunggu 30 detik untuk memastikan container siap
+        docker compose ps       # Tampilkan status semua container
+        
     # Step 6: Test apakah aplikasi berjalan dengan baik
     - name: Health check
       run: |
-        curl -f http://localhost:8081 || exit 1  # Test akses ke aplikasi
+        curl -f http://localhost:8081 || exit 1  # Test akses ke aplikasi, gagal jika tidak bisa
+        
     # Step 7: Kasih tahu hasil deployment
     - name: Notify deployment status
-      if: always()  # Selalu jalankan step ini (sukses atau gagal)
+      if: always()  # Selalu jalankan step ini, meski job gagal
       run: |
         if [ ${{ job.status }} == 'success' ]; then
           echo "✅ Deployment berhasil di laptop-andi! Aplikasi sudah update ke versi terbaru"
@@ -71,56 +78,56 @@ jobs:
         fi
 
   deploy-Wbestar:
-      runs-on: [bstr]
+      runs-on: [bstr]  # Runner yang akan menjalankan job ini (harus sesuai label runner)
       
       steps:
   # Step 0: Detect project path dynamically
       - name: Set project path
         run: |
-          PROJECT_PATH="$HOME/WNews"
-          if [ ! -d "$PROJECT_PATH" ]; then
+          PROJECT_PATH="$HOME/WNews"  # Tentukan path folder project
+          if [ ! -d "$PROJECT_PATH" ]; then  # Cek apakah folder ada
             echo "❌ Error: Folder project tidak ditemukan di $PROJECT_PATH"
             exit 1
           fi
-          echo "PROJECT_PATH=$PROJECT_PATH" >> $GITHUB_ENV
+          echo "PROJECT_PATH=$PROJECT_PATH" >> $GITHUB_ENV  # Simpan path sebagai environment variable
           echo "✅ Found project at: $PROJECT_PATH"
   # Step 1: Ambil kode terbaru dari branch master
       - name: Pull latest changes
         working-directory: ${{ env.PROJECT_PATH }}
         run: |
-          git fetch origin master
-          git reset --hard origin/master
+          git fetch origin master      # Download update terbaru
+          git reset --hard origin/master  # Reset ke versi terbaru
   # Step 2: Stop semua container yang sedang berjalan
       - name: Stop existing containers
         working-directory: ${{ env.PROJECT_PATH }}
         run: |
-          docker compose down || true
+          docker compose down || true  # Stop container, lanjutkan jika error
   # Step 3: Hapus image lama untuk menghemat storage
       - name: Remove old images
         working-directory: ${{ env.PROJECT_PATH }}
         run: |
-          docker system prune -f
-          docker image prune -a -f
+          docker system prune -f    # Hapus container/network yang tidak terpakai
+          docker image prune -a -f  # Hapus semua image yang tidak terpakai
   # Step 4: Build ulang dan jalankan semua container
       - name: Build and start containers
         working-directory: ${{ env.PROJECT_PATH }}
         run: |
-          docker compose build --no-cache
-          docker compose up -d
+          docker compose build --no-cache  # Build image baru tanpa cache
+          docker compose up -d             # Jalankan container di background
   # Step 5: Tunggu sampai semua service siap
       - name: Wait for services to be ready
         working-directory: ${{ env.PROJECT_PATH }}
         run: |
-          sleep 30
-          docker compose ps
+          sleep 30                # Tunggu 30 detik
+          docker compose ps       # Tampilkan status semua container
   # Step 6: Test apakah aplikasi berjalan dengan baik
       - name: Health check
         run: |
-          curl -f http://localhost:8081 || exit 1
+          curl -f http://localhost:8081 || exit 1  # Test akses ke aplikasi
           
   # Step 7: Kasih tahu hasil deployment
       - name: Notify deployment status
-        if: always()
+        if: always()  # Selalu jalankan step ini
         run: |
           if [ ${{ job.status }} == 'success' ]; then
             echo "✅ Deployment berhasil di Wbestar! WNews sudah versi terbaru"
