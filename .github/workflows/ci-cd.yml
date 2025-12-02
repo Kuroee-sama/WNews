@@ -20,14 +20,13 @@ jobs:
     # Step 0: Detect project path dynamically
     - name: Set project path
       run: |
-        PROJECT_PATH=$(find /home -name 'WNews' -type d 2>/dev/null | head -1)
-        if [ -z "$PROJECT_PATH" ]; then
-          echo "❌ Error: Folder WNews tidak ditemukan di /home"
-          echo "Pastikan project sudah di-clone ke salah satu user directory"
-          exit 1
-        fi
-        echo "PROJECT_PATH=$PROJECT_PATH" >> $GITHUB_ENV
-        echo "✅ Found project at: $PROJECT_PATH"
+        PROJECT_PATH="$HOME/WNews"
+          if [ ! -d "$PROJECT_PATH" ]; then
+            echo "❌ Error: Folder project tidak ditemukan di $PROJECT_PATH"
+            exit 1
+          fi
+          echo "PROJECT_PATH=$PROJECT_PATH" >> $GITHUB_ENV
+          echo "✅ Found project at: $PROJECT_PATH"
         
     # Step 1: Ambil kode terbaru dari branch master
     - name: Pull latest changes
